@@ -1,7 +1,8 @@
 <?php
 //En esta clase vemos como mostrar un mensaje, crear variables, 
 //mostrar el contenido de una variable, declarar y utilizar arrays, así como objetos.
-include "alumno.php";
+include "alumnoEjemplo.php";
+include "Alumno.php";
 
 echo "<h1>Hola Mundo</h1>";
 
@@ -31,13 +32,13 @@ $miObjeto->nombre="Lorenzo";
 var_dump($miObjeto);
 echo "<br>";
 
-$miAlumno = new Alumno();
+$miAlumno = new AlumnoEjemplo();
 $miAlumno->nombre = "Lore";
 $miAlumno->edad = 23; 
 var_dump($miAlumno);
 echo "<br>";
 
-$alumno2 = new Alumno();
+$alumno2 = new AlumnoEjemplo();
 $alumno2->nombre = "Ana";
 $alumno2->edad = 19;
 var_dump($alumno2);
@@ -48,4 +49,15 @@ echo "<br>";
 
 $miAlumno->retornarjson();
 echo "<br>";
+
+$alumno3 = new AlumnoEjemplo("Nahuel", 25);
+var_dump($alumno3);
+echo "<br>";
+
+echo "--------------------------------------------------------------------";
+echo "<br>";
+
+$otroAlumno = new Alumno("Pepe", 40, "25493812", "123887");
+$otroAlumno->RetornarJson();
+
 ?>

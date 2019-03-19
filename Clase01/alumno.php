@@ -1,12 +1,20 @@
 <?php
-//Las clases se definen igual que en cualquier otro lenguaje OOP
-class Alumno
-{
-    public $nombre;
-    public $edad;
+include "Persona.php";
 
-    function retornarJson() {
-        echo json_encode($this);
+class Alumno extends Persona
+{
+    public $legajo;
+    
+    function RetornarJson()
+    {
+        parent::RetornarJson();
+    }
+
+    function __construct($nombre, $edad, $dni, $legajo)
+    {
+        parent::__construct($nombre, $edad, $dni);
+        $this->legajo = $legajo;
     }
 }
+
 ?>
