@@ -7,7 +7,7 @@ Todas las clases de Programacion III
 
 * http://php.net/
 
-* phpMyAdmin (localhost/phpmyadmin)
+* phpMyAdmin (localhost/phpmyadmin/)
 
 # Sitio servidor
 * http://koalter.000webhostapp.com
