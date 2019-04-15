@@ -23,4 +23,9 @@ function ListarAlumnos($filename)
 
     return $stream;
 }
+
+if ($_SERVER['REQUEST_METHOD'] == 'GET') 
+{
+    ListarAlumnos('../ListadoAlumnos.json');
+}
 ?>
