@@ -19,7 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `utnfra`
 --
-
+CREATE DATABASE `utnfra`;
+USE `utnfra`;
 -- --------------------------------------------------------
 
 --
