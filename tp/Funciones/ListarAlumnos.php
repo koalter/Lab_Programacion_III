@@ -9,7 +9,7 @@ function ListarAlumnos($filename)
         $size = filesize($filename);
         if ($size > 0)
         {
-            $stream = fread($fp, filesize($filename));
+            $stream = fread($fp, $size);
             echo $stream . PHP_EOL;
             $stream = json_decode($stream);
         }

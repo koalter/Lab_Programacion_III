@@ -35,8 +35,14 @@ class Alumno
 
     // Guarda un array de alumnos en un archivo
     public function Guardar()
-    {
-
+    { // TODO: testear y fixear
+        $file = fopen("Alumnos.json", "r");
+        $listadoAlumnos = fread($file, filesize("Alumnos.json"));
+        fclose($file);
+        $listadoAlumnos[] = json_encode($this);
+        $file = fopen("Alumnos.json", "w");
+        fwrite($file, $listadoAlumnos);
+        fclose($file);
     }
 }
 
