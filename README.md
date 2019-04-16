@@ -9,5 +9,7 @@ Todas las clases de Programacion III
 
 * phpMyAdmin (localhost/phpmyadmin/)
 
+* Repositorio de PDO ejemplo (https://github.com/koalter/PDOEjemplo)
+
 # Sitio servidor
 * http://koalter.000webhostapp.com
