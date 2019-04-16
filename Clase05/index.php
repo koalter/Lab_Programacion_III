@@ -11,7 +11,7 @@ switch ($metodo)
         // include_once ("./Funciones/ListarAlumnos.php");
         break;
     case 'POST':
-        // include_once ("./Funciones/CrearAlumno.php");
+        include_once ("./Funciones/CrearAlumno.php");
         break;
     default:
         echo "Proba con GET primero!";

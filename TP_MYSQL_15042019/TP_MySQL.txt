@@ -1,4 +1,4 @@
---
+﻿--
 -- Base de datos: `utn`
 --
 CREATE DATABASE utn;
@@ -95,8 +95,10 @@ ALTER TABLE provedores
 COMMIT;
 
 -- --------------------------------------------------------
+-- QUERIES
+-- --------------------------------------------------------
 
-use utn;
+USE utn;
 
 -- 1. Obtener los detalles completos de todos los productos, ordenados alfabéticamente.
 select * from productos p

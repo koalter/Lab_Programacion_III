@@ -19,9 +19,9 @@ class Alumno
     // Metodo constructor, externo del metodo __construct() por defecto
     public function Constructor($Apellido, $Legajo, $IdLocalidad)
     {
-        $this->$Apellido = $Apellido;
-        $this->$Legajo = $Legajo;
-        $this->$IdLocalidad = $IdLocalidad;
+        $this->Apellido = $Apellido;
+        $this->Legajo = $Legajo;
+        $this->IdLocalidad = $IdLocalidad;
     }
 
     // Inserta un registro de Alumno en la base de datos
