@@ -28,10 +28,10 @@ switch ($metodo)
         switch ($_POST['caso'])
         {
             case 'consultarProveedor':
-                $mensaje = $entidad->Consultar();
+                $mensaje = $proveedor->Consultar();
                 break;
             case 'proveedores':
-                $mensaje = $entidad->Listar();
+                $mensaje = $proveedor->Listar();
                 break;
             default:
                 $mensaje = 'Usar la propiedad "caso" con el valor "consultarProveedor" o "proveedores"';

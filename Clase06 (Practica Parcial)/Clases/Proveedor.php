@@ -16,9 +16,9 @@ class Proveedor
 
     public function cargarProveedor($filename)
     { 
+        $id = 1;
         $proveedores = array();
         $file = fopen($filename, "r");
-        $id = 1;
         
         if ($file)
         {
@@ -56,11 +56,11 @@ class Proveedor
         return $proveedores;
     }
 
-    public function Consultar()
-    {
+    public function consultarProveedor($filename)
+    { // PUNTO DE RETORNO
         $retorno = '';
         $flag = false;
-        $fp = fopen("./proveedores.txt", "r");
+        $fp = fopen($filename, "r");
         if ($fp && $_GET['nombre'] != null)
         {
             while (!feof($fp))
@@ -74,7 +74,7 @@ class Proveedor
             }
             if (!$flag)
             {
-                $retorno = "No existe proveedor xxx";
+                $retorno = "No existe proveedor " . $_GET['nombre'];
             }
             fclose($fp);
         }
@@ -82,18 +82,35 @@ class Proveedor
         return $retorno;
     }
 
-    public function Listar()
+    // Lista a los proveedores por echo
+    // y retorna un array de proveedores
+    public function proveedores($filename)
     {
-        $stream = "";
-        $filename = "./proveedores.txt";
-        $fp = fopen($filename, "r");
-        if ($fp)
+        $proveedores = array();
+        $file = fopen($filename, "r");
+        
+        if ($file)
         {
-            $stream = fread($fp, filesize($filename));
-            fclose($fp);
+            while (!feof($file))
+            {
+                $object = fscanf($file, "%s %s %s %s\n");
+                //var_dump($object);
+                if ($object)
+                {
+                    $id = $object[0];
+                    $dummy = new Proveedor();
+                    $dummy->Constructor($id, $object[1], $object[2], $object[3]);
+                    $proveedores[] = $dummy;
+                    // var_dump($dummy);
+                }
+            }
+            $id++;
+            //var_dump($proveedores);
+
+            fclose($file);
         }
 
-        return $stream;
+        return $proveedores;
     }
 }
 
