@@ -1,5 +1,5 @@
 <?php
-
+// PUNTO DE RETORNO
 class Proveedor
 {
     public $id;
@@ -15,26 +15,46 @@ class Proveedor
         $this->foto = $foto;
     }
 
-    public function Guardar()
-    { // TODO: falta hacer algo que haga al id unico
-        $stream = "";
-        $filename = "./proveedores.txt";
-        $fp = fopen($filename, "r");
-        if ($fp)
-        {
-            $stream = fread($fp, filesize($filename));
-            fclose($fp);
-        }
+    public function cargarProveedor($filename)
+    { 
+        $proveedores = array();
+        $file = fopen($filename, "r");
+        $id = 1;
         
-        $fp = fopen($filename, "w");
-        if ($fp)
+        if ($file)
         {
-            $stream = $stream . $this->id . " " . $this->nombre . " " . $this->email . " " . $this->foto . PHP_EOL;
-            fwrite($fp, $stream);
-        }
-        fclose($fp);
+            while (!feof($file))
+            {
+                $object = fscanf($file, "%s %s %s %s\n");
+                //var_dump($object);
+                if ($object)
+                {
+                    $id = $object[0];
+                    $dummy = new Proveedor();
+                    $dummy->Constructor($id, $object[1], $object[2], $object[3]);
+                    $proveedores[] = $dummy;
+                    // var_dump($dummy);
+                }
+            }
+            $id++;
+            var_dump($proveedores);
 
-        return $stream;
+            fclose($file);
+        }
+
+        $file = fopen($filename, "w");
+        $dummy = new Proveedor();
+        $dummy->Constructor($id, $_POST['nombre'], $_POST['email'], $_POST['foto']);
+        $proveedores[] = $dummy;
+
+        foreach ($proveedores as $proveedor)
+        {
+            var_dump($proveedor);
+            $string = $proveedor->id . " " . $proveedor->nombre . " " . $proveedor->email . " " . $proveedor->foto . PHP_EOL;
+            fwrite($file, $string);
+        }
+
+        return $proveedores;
     }
 
     public function Consultar()
