@@ -41,14 +41,11 @@ class Proveedor
         $proveedores = $this->proveedores($filename);
         if ($_GET['nombre'] != null)
         {
-            while (/* condition */)
+            foreach ($proveedores as $proveedor)
             {
-                // do something
-                $stream = fscanf($fp, "%s %s %s %s\n");
-                if (strcasecmp($stream[1], $_GET['nombre']) == 0)
+                if ($_GET['nombre'] == $proveedor->nombre)
                 {
-                    $retorno = json_encode($stream);
-                    $flag = true;
+                    $retorno = $proveedor;
                 }
             }
             if (!$flag)

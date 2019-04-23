@@ -13,3 +13,9 @@ Todas las clases de Programacion III
 
 # Sitio servidor
 * http://koalter.000webhostapp.com
+
+# Primer Parcial
+* ABM
+* Foto
+* Gestion de consultas de archivos
+* (No se toma DBO)
