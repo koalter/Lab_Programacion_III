@@ -1,5 +1,4 @@
 <?php
-// PUNTO DE RETORNO
 class Proveedor
 {
     public $id;
@@ -37,7 +36,7 @@ class Proveedor
                 }
             }
             $id++;
-            var_dump($proveedores);
+            //var_dump($proveedores);
 
             fclose($file);
         }
@@ -49,7 +48,7 @@ class Proveedor
 
         foreach ($proveedores as $proveedor)
         {
-            var_dump($proveedor);
+            //var_dump($proveedor);
             $string = $proveedor->id . " " . $proveedor->nombre . " " . $proveedor->email . " " . $proveedor->foto . PHP_EOL;
             fwrite($file, $string);
         }

@@ -3,6 +3,7 @@ include ("./Clases/Proveedor.php");
 include ("./Clases/Pedido.php");
 
 $mensaje = "";
+$filename = "./proveedores.txt";
 $metodo = $_SERVER['REQUEST_METHOD'];
 $proveedor = new Proveedor();
 $pedido = new Pedido();
@@ -13,8 +14,7 @@ switch ($metodo)
         switch ($_POST['caso'])
         {
             case 'cargarProveedor':
-                $proveedor->Constructor($_POST['id'], $_POST['nombre'], $_POST['email'], $_POST['foto']);
-                $mensaje = $proveedor->Guardar();
+                var_dump($proveedor->cargarProveedor($filename));
                 break;
             case 'hacerPedido':
                 $pedido->HacerPedido($_POST['producto'], $_POST['cantidad'], $_POST['idProveedor']);
