@@ -38,11 +38,12 @@ class Proveedor
     {
         $retorno = '';
         $flag = false;
-        $fp = fopen($filename, "r");
-        if ($fp && $_GET['nombre'] != null)
+        $proveedores = $this->proveedores($filename);
+        if ($_GET['nombre'] != null)
         {
-            while (!feof($fp))
+            while (/* condition */)
             {
+                // do something
                 $stream = fscanf($fp, "%s %s %s %s\n");
                 if (strcasecmp($stream[1], $_GET['nombre']) == 0)
                 {

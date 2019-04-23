@@ -28,7 +28,7 @@ switch ($metodo)
         switch ($_GET['caso'])
         {
             case 'consultarProveedor':
-                $mensaje = $proveedor->Consultar();
+                $mensaje = $proveedor->consultarProveedor($filename);
                 break;
             case 'proveedores':
                 $mensaje = var_dump($proveedor->proveedores($filename));
