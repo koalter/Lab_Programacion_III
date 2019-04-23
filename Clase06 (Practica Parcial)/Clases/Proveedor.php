@@ -15,31 +15,9 @@ class Proveedor
     }
 
     public function cargarProveedor($filename)
-    { 
-        $id = 1;
-        $proveedores = array();
-        $file = fopen($filename, "r");
-        
-        if ($file)
-        {
-            while (!feof($file))
-            {
-                $object = fscanf($file, "%s %s %s %s\n");
-                //var_dump($object);
-                if ($object)
-                {
-                    $id = $object[0];
-                    $dummy = new Proveedor();
-                    $dummy->Constructor($id, $object[1], $object[2], $object[3]);
-                    $proveedores[] = $dummy;
-                    // var_dump($dummy);
-                }
-            }
-            $id++;
-            //var_dump($proveedores);
-
-            fclose($file);
-        }
+    {
+        $proveedores = $this->proveedores($filename);
+        $id = sizeof($proveedores) + 1;
 
         $file = fopen($filename, "w");
         $dummy = new Proveedor();
@@ -57,7 +35,7 @@ class Proveedor
     }
 
     public function consultarProveedor($filename)
-    { // PUNTO DE RETORNO
+    {
         $retorno = '';
         $flag = false;
         $fp = fopen($filename, "r");
@@ -97,14 +75,12 @@ class Proveedor
                 //var_dump($object);
                 if ($object)
                 {
-                    $id = $object[0];
                     $dummy = new Proveedor();
-                    $dummy->Constructor($id, $object[1], $object[2], $object[3]);
+                    $dummy->Constructor($object[0], $object[1], $object[2], $object[3]);
                     $proveedores[] = $dummy;
                     // var_dump($dummy);
                 }
             }
-            $id++;
             //var_dump($proveedores);
 
             fclose($file);

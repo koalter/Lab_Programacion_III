@@ -25,13 +25,13 @@ switch ($metodo)
         }
         break;
     case 'GET':
-        switch ($_POST['caso'])
+        switch ($_GET['caso'])
         {
             case 'consultarProveedor':
                 $mensaje = $proveedor->Consultar();
                 break;
             case 'proveedores':
-                $mensaje = $proveedor->Listar();
+                $mensaje = var_dump($proveedor->proveedores($filename));
                 break;
             default:
                 $mensaje = 'Usar la propiedad "caso" con el valor "consultarProveedor" o "proveedores"';
