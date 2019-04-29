@@ -42,6 +42,9 @@ switch ($metodo)
             case 'listarPedidoProveedor':
                 $mensaje = json_encode(Pedido::listarPedidoProveedor($filePedidos));
                 break;
+            case 'fotosBack':
+                $mensaje = json_encode(Proveedor::fotosBack($fileProveedores));
+                break;
             default:
                 $mensaje = 'Usar la propiedad "caso" con el valor "consultarProveedor", "proveedores" o "listarPedidos"';
                 break;

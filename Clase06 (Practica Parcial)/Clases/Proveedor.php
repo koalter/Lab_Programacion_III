@@ -41,7 +41,7 @@ class Proveedor
         $proveedores = Proveedor::proveedores($filename);
         $id = sizeof($proveedores) + 1;
 
-        $dummy = new Proveedor($id, $_POST['nombre'], $_POST['email'], $_POST['foto']);
+        $dummy = new Proveedor($id, $_POST['nombre'], $_POST['email'], $_FILES['foto']['name']);
         $proveedores[] = $dummy;
         
         Proveedor::Guardar($filename, $proveedores);
@@ -136,14 +136,51 @@ class Proveedor
                         $proveedor->nombre = $_POST['nombre'];
                     if ($_POST['email'] != null || $_POST['email'] != '')
                         $proveedor->email = $_POST['email'];
-                    if ($_POST['foto'] != null || $_POST['foto'] != '')
-                        $proveedor->foto = $_POST['foto'];
+                    if ($_FILES != null)
+                    {
+                        $path = './'.$proveedor->foto;
+                        if (file_exists($path))
+                        {
+                            $destination = './backUpFotos/'.$proveedor->id.' '.date('(d-m-y)', time()).'.'.pathinfo($path, PATHINFO_EXTENSION);
+                            if (!file_exists('./backUpFotos/'))
+                                mkdir('./backUpFotos/');
+                            rename($path, $destination);
+                        }
+                        $proveedor->foto = $_FILES['foto']['name'];
+                    }
                     
                     $retorno[] = json_encode($proveedor);
                 }
             }
 
             Proveedor::Guardar($filename, $proveedores);
+        }
+
+        return $retorno;
+    }
+
+    public static function fotosBack($fproveedores)
+    {
+        $proveedores = Proveedor::proveedores($fproveedores);
+        $retorno = array();
+
+        if (file_exists('./backUpFotos/'))
+        {
+            $listado = array_diff(scandir('./backUpFotos'), array('..', '.'));
+
+            foreach ($listado as $elemento)
+            {
+                $explode = explode('.', $elemento);
+                $str = sscanf($explode[0], "%d %s");
+
+                foreach ($proveedores as $proveedor)
+                {
+                    if ($proveedor->id == $str[0])
+                    {
+                        $retorno[] = $proveedor->nombre.' '.$str[1];  
+                    }
+                }
+            }
         }
 
         return $retorno;
