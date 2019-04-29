@@ -26,6 +26,7 @@ class Proveedor
     {
         $file = fopen($filename, "w");
 
+        // .txt
         foreach ($proveedores as $proveedor)
         {
             //var_dump($proveedor);
@@ -33,6 +34,17 @@ class Proveedor
             fwrite($file, $string);
         }
 
+        // .csv
+        // foreach ($proveedores as $proveedor)
+        // {
+        //     $string = $proveedor->id.",".$proveedor->nombre.",".$proveedor->email.",".$proveedor->foto.",".PHP_EOL;
+        //     fwrite($file, $string);
+        // }
+
+        // .json
+        // fwrite($file, json_encode($proveedores));
+
+        // Despues podria automatizarlo con un switch chequeando la extension del $filename
         fclose($file);
     }
 
@@ -97,10 +109,12 @@ class Proveedor
     public static function proveedores($filename)
     {
         $proveedores = array();
-        $file = fopen($filename, "r");
         
-        if ($file)
+        if (file_exists($filename))
         {
+            $file = fopen($filename, "r");
+
+            // .txt
             while (!feof($file))
             {
                 $object = fscanf($file, "%s %s %s %s\n");
@@ -112,9 +126,34 @@ class Proveedor
                     // var_dump($dummy);
                 }
             }
+
+            // .csv
+            // while (($buffer = fgets($file)) !== false)
+            // {
+            //     $object = explode(",", $buffer);
+                
+            //     if ($object)
+            //     {
+            //         $dummy = new Proveedor($object[0], $object[1], $object[2], $object[3]);
+            //         $proveedores[] = $dummy;
+            //     }
+            // }
+
+            // .json
+            // $objetoJson = json_decode(fread($file, filesize($filename)));
+            // foreach ($objetoJson as $elemento) //este foreach lo usamos si nos interesa convertir stdClass a la una clase explicita
+            // {
+            //     $dummy = new Proveedor($elemento->id, $elemento->nombre, $elemento->email, $elemento->foto);
+            //     $proveedores[] = $dummy;
+            // }
+            
             //var_dump($proveedores);
 
             fclose($file);
+        }
+        else
+        {
+            echo "EL ARCHIVO ".$filename." NO EXISTE O NO PUDO LEERSE CORRECTAMENTE";
         }
 
         return $proveedores;
