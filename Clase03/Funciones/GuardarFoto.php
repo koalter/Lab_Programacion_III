@@ -1,6 +1,6 @@
 <?php
 include_once '../Clases/Alumno.php';
-//var_dump($_FILES);
+var_dump($_FILES);
 
 if ($_FILES != null) {
     $alumno = new Alumno($_POST['apellido'], $_POST['legajo']);
@@ -11,7 +11,11 @@ if ($_FILES != null) {
 
     if (file_exists($destino)) {
         //codigo para realizar el backup
-        $backupPath = '../FotosBackup/'.$filename.date('(dmy)', time()).'.'.pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION);
+        $backupPath = '../FotosBackup/'.$filename.date('(d-m-y)', time()).'.'.pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION);
+        if (!file_exists('../FotosBackup/'))
+        {
+            mkdir('../FotosBackup/');
+        }
         $backup = rename($destino, $backupPath);
         
         if ($backup) {
@@ -23,6 +27,10 @@ if ($_FILES != null) {
     if ($return) {
         echo "<p>El archivo se movio a Fotos</p>";
     }
+}
+else
+{
+    echo "Para empezar, suba un archivo con el metodo POST usando key=foto";
 }
 
 ?>
