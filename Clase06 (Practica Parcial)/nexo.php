@@ -1,12 +1,12 @@
 <?php
-include ("./Clases/Proveedor.php");
-include ("./Clases/Pedido.php");
+include_once ("./Clases/Proveedor.php");
+include_once ("./Clases/Pedido.php");
 
 $mensaje = "";
-$filename = "./proveedores.txt";
+$fileProveedores = "./proveedores.txt";
+$filePedidos = "./pedidos.txt";
 $metodo = $_SERVER['REQUEST_METHOD'];
-$proveedor = new Proveedor();
-$pedido = new Pedido();
+// $pedido = new Pedido();
 
 switch ($metodo)
 {
@@ -14,10 +14,10 @@ switch ($metodo)
         switch ($_POST['caso'])
         {
             case 'cargarProveedor':
-                var_dump($proveedor->cargarProveedor($filename));
+                $mensaje = json_encode(Proveedor::cargarProveedor($fileProveedores));
                 break;
             case 'hacerPedido':
-                $pedido->HacerPedido($_POST['producto'], $_POST['cantidad'], $_POST['idProveedor']);
+                $mensaje = json_encode(Pedido::hacerPedido($fileProveedores, $filePedidos));
                 break;
             default:
                 $mensaje = 'Usar la propiedad "caso" con el valor "cargarProveedor"';
@@ -28,13 +28,19 @@ switch ($metodo)
         switch ($_GET['caso'])
         {
             case 'consultarProveedor':
-                $mensaje = $proveedor->consultarProveedor($filename);
+                $mensaje = json_encode(Proveedor::consultarProveedor($fileProveedores));
                 break;
             case 'proveedores':
-                $mensaje = var_dump($proveedor->proveedores($filename));
+                $mensaje = json_encode(Proveedor::proveedores($fileProveedores));
+                break;
+            case 'listarPedidos':
+                $mensaje = json_encode(Pedido::listarPedidos($filePedidos));
+                break;
+            case 'listarPedidoProveedor':
+                $mensaje = json_encode(Pedido::listarPedidoProveedor($filePedidos));
                 break;
             default:
-                $mensaje = 'Usar la propiedad "caso" con el valor "consultarProveedor" o "proveedores"';
+                $mensaje = 'Usar la propiedad "caso" con el valor "consultarProveedor", "proveedores" o "listarPedidos"';
                 break;
         }
         break;

@@ -1,0 +1,8 @@
+producto1 12 1
+producto2 20 3
+producto3 24 5
+producto4 8 7
+producto5 15 8
+producto6 7 1
+producto7 10 3
+producto8 25 3

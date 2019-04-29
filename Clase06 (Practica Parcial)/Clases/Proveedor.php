@@ -6,7 +6,15 @@ class Proveedor
     public $email;
     public $foto;
 
-    public function Constructor($id, $nombre, $email, $foto)
+    // public function Constructor($id, $nombre, $email, $foto)
+    // {
+    //     $this->id = $id;
+    //     $this->nombre = $nombre;
+    //     $this->email = $email;
+    //     $this->foto = $foto;
+    // }
+
+    public function __construct($id, $nombre, $email, $foto)
     {
         $this->id = $id;
         $this->nombre = $nombre;
@@ -14,14 +22,13 @@ class Proveedor
         $this->foto = $foto;
     }
 
-    public function cargarProveedor($filename)
+    public static function cargarProveedor($filename)
     {
-        $proveedores = $this->proveedores($filename);
+        $proveedores = Proveedor::proveedores($filename);
         $id = sizeof($proveedores) + 1;
 
         $file = fopen($filename, "w");
-        $dummy = new Proveedor();
-        $dummy->Constructor($id, $_POST['nombre'], $_POST['email'], $_POST['foto']);
+        $dummy = new Proveedor($id, $_POST['nombre'], $_POST['email'], $_POST['foto']);
         $proveedores[] = $dummy;
 
         foreach ($proveedores as $proveedor)
@@ -31,36 +38,57 @@ class Proveedor
             fwrite($file, $string);
         }
 
-        return $proveedores;
+        fclose($file);
+
+        return $dummy;
     }
 
-    public function consultarProveedor($filename)
+    public static function consultarProveedor($filename)
     {
-        $retorno = '';
+        $retorno = array();
         $flag = false;
-        $proveedores = $this->proveedores($filename);
+        $proveedores = Proveedor::proveedores($filename);
         if ($_GET['nombre'] != null)
         {
             foreach ($proveedores as $proveedor)
             {
-                if ($_GET['nombre'] == $proveedor->nombre)
+                if (strcasecmp($_GET['nombre'], $proveedor->nombre) == 0)
                 {
-                    $retorno = $proveedor;
+                    $retorno[] = $proveedor;
+
+                    $flag = true;
                 }
             }
             if (!$flag)
             {
                 $retorno = "No existe proveedor " . $_GET['nombre'];
             }
-            fclose($fp);
         }
         
         return $retorno;
     }
 
+    public static function consultarProveedorPorId($proveedores)
+    {
+        $flag = false;
+
+        if ($_POST['idProveedor'] != null)
+        {
+            foreach ($proveedores as $proveedor)
+            {
+                if ($_POST['idProveedor'] == $proveedor->id)
+                {
+                    $flag = true;
+                }
+            }
+        }
+        
+        return $flag;
+    }
+
     // Lista a los proveedores por echo
     // y retorna un array de proveedores
-    public function proveedores($filename)
+    public static function proveedores($filename)
     {
         $proveedores = array();
         $file = fopen($filename, "r");
@@ -73,8 +101,7 @@ class Proveedor
                 //var_dump($object);
                 if ($object)
                 {
-                    $dummy = new Proveedor();
-                    $dummy->Constructor($object[0], $object[1], $object[2], $object[3]);
+                    $dummy = new Proveedor($object[0], $object[1], $object[2], $object[3]);
                     $proveedores[] = $dummy;
                     // var_dump($dummy);
                 }
