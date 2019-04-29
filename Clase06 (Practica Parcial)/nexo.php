@@ -19,8 +19,11 @@ switch ($metodo)
             case 'hacerPedido':
                 $mensaje = json_encode(Pedido::hacerPedido($fileProveedores, $filePedidos));
                 break;
+            case 'modificarProveedor':
+                $mensaje = json_encode(Proveedor::modificarProveedor($fileProveedores));
+                break;
             default:
-                $mensaje = 'Usar la propiedad "caso" con el valor "cargarProveedor"';
+                $mensaje = 'Usar la propiedad "caso" con el valor "cargarProveedor", "hacerPedido" o "modificarProveedor"';
                 break;
         }
         break;

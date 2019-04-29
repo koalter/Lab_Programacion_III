@@ -22,14 +22,9 @@ class Proveedor
         $this->foto = $foto;
     }
 
-    public static function cargarProveedor($filename)
+    static function Guardar($filename, $proveedores)
     {
-        $proveedores = Proveedor::proveedores($filename);
-        $id = sizeof($proveedores) + 1;
-
         $file = fopen($filename, "w");
-        $dummy = new Proveedor($id, $_POST['nombre'], $_POST['email'], $_POST['foto']);
-        $proveedores[] = $dummy;
 
         foreach ($proveedores as $proveedor)
         {
@@ -39,6 +34,17 @@ class Proveedor
         }
 
         fclose($file);
+    }
+
+    public static function cargarProveedor($filename)
+    {
+        $proveedores = Proveedor::proveedores($filename);
+        $id = sizeof($proveedores) + 1;
+
+        $dummy = new Proveedor($id, $_POST['nombre'], $_POST['email'], $_POST['foto']);
+        $proveedores[] = $dummy;
+        
+        Proveedor::Guardar($filename, $proveedores);
 
         return $dummy;
     }
@@ -112,6 +118,35 @@ class Proveedor
         }
 
         return $proveedores;
+    }
+
+    public static function modificarProveedor($filename)
+    {
+        $proveedores = Proveedor::proveedores($filename);
+        $retorno = array();
+
+        if ($_POST['id'] != null)
+        {
+            foreach ($proveedores as $proveedor)
+            {
+                if ($_POST['id'] == $proveedor->id)
+                {
+                    $retorno[] = json_encode($proveedor);
+                    if ($_POST['nombre'] != null || $_POST['nombre'] != '')
+                        $proveedor->nombre = $_POST['nombre'];
+                    if ($_POST['email'] != null || $_POST['email'] != '')
+                        $proveedor->email = $_POST['email'];
+                    if ($_POST['foto'] != null || $_POST['foto'] != '')
+                        $proveedor->foto = $_POST['foto'];
+                    
+                    $retorno[] = json_encode($proveedor);
+                }
+            }
+
+            Proveedor::Guardar($filename, $proveedores);
+        }
+
+        return $retorno;
     }
 }
 

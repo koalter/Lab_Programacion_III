@@ -29,9 +29,9 @@ class Pedido
         {
             $pedidos = Pedido::listarPedidos($fpedidos);
 
-            $file = fopen($fpedidos, "w");
             $dummy = new Pedido($_POST['producto'], $_POST['cantidad'], $_POST['idProveedor']);
             $pedidos[] = $dummy;
+            $file = fopen($fpedidos, "w");
     
             foreach ($pedidos as $pedido)
             {
