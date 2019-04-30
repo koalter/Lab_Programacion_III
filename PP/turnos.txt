@@ -1,0 +1,4 @@
+9 aaa111 toyota base 5000 10000
+19 bbb222 suzuki base 15000 20000
+12 asd654 ferrari monza 15000 20000
+12 asd654 ferrari monza 15000 20000

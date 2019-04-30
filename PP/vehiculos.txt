@@ -1,0 +1,3 @@
+unaMarca algunModelo aaa111 6666 foto2.jpg
+otraMarca otroModelo bbb222 666 foto2.jpg
+mimarca mimodelo asd654 1241221 foto3.jpg
