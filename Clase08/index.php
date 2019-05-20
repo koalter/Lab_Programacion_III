@@ -37,13 +37,13 @@ $app->group('/Persona', function () {
  
     $this->get('/', \PersonaApi::class . ':TraerTodos');
    
-    // $this->get('/{id}', \PersonaApi::class . ':TraerUno');
+    $this->get('/{id}', \PersonaApi::class . ':TraerUno');
   
     $this->post('/', \PersonaApi::class . ':GuardarUno');
   
     $this->delete('/', \PersonaApi::class . ':BorrarUno');
   
-    // $this->put('/', \PersonaApi::class . ':ModificarUno');
+    $this->put('/', \PersonaApi::class . ':ModificarUno');
        
   });
 
