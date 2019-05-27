@@ -5,7 +5,7 @@ require_once 'IApiPersona.php';
 // Aca va la lógica de negocio
 class PersonaApi extends Persona implements IApiPersona {
 
-    public function GuardarUno($request, $response, $args) {
+    public function CargarUno($request, $response, $args) {
         $ArrayDeParametros = $request->getParsedBody();
         //var_dump($ArrayDeParametros);
         $nombre = $ArrayDeParametros['nombre'];
