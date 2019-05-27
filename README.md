@@ -15,6 +15,8 @@ Todas las clases de Programacion III
 
 * Repositorio de PDO ejemplo (https://github.com/koalter/PDOEjemplo)
 
+* Repositorio ejemplo API-REST (https://github.com/octaviovillegas/APIREST-PHP-POO-JWT-MIDDLEWARE-Documentar)
+
 # Sitio servidor
 * http://koalter.000webhostapp.com
 
@@ -23,3 +25,7 @@ Todas las clases de Programacion III
 * Foto
 * Gestion de consultas de archivos
 * (No se toma DBO)
+
+# Trabajo Práctico Final
+* Comanda
+* Requerimientos de la PWA _la comanda_ + BackEnd.docx
