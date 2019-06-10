@@ -75,6 +75,13 @@ $app->group('/Persona', function () {
 
 /* codifgo que se ejecuta antes que los llamados por la ruta*/
 $app->add(function ($request, $response, $next) {
+  $response->getBody()->write('<p>Antes de ejecutar DOS </p>');
+  $response = $next($request, $response);
+  $response->getBody()->write('<p>Despues de ejecutar DOS</p>');
+
+  return $response;
+});
+$app->add(function ($request, $response, $next) {
   $response->getBody()->write('<p>Antes de ejecutar UNO </p>');
   $response = $next($request, $response);
   $response->getBody()->write('<p>Despues de ejecutar UNO</p>');
@@ -82,13 +89,6 @@ $app->add(function ($request, $response, $next) {
   return $response;
 });
 
-$app->add(function ($request, $response, $next) {
-  $response->getBody()->write('<p>Antes de ejecutar DOS </p>');
-  $response = $next($request, $response);
-  $response->getBody()->write('<p>Despues de ejecutar DOS</p>');
-
-  return $response;
-});
 // despues de esto y llamando a la ruta cd/, el resultaso es este :
 /*
 Antes de ejecutar Dos ***
