@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-06-2019 a las 06:41:38
+-- Tiempo de generación: 27-06-2019 a las 04:43:50
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.3
 
@@ -25,56 +25,70 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `articulos`
+--
+
+CREATE TABLE `articulos` (
+  `id` int(11) NOT NULL,
+  `tipo` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `descripcion` varchar(255) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `articulos`
+--
+
+INSERT INTO `articulos` (`id`, `tipo`, `descripcion`) VALUES
+(1, 'cocinero', 'hamburguesa con queso'),
+(2, 'mozo', 'pepsi');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `empleados`
 --
 
 CREATE TABLE `empleados` (
   `id` int(11) NOT NULL,
   `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `idRol` int(11) NOT NULL
+  `rol` varchar(50) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `empleados`
 --
 
-INSERT INTO `empleados` (`id`, `nombre`, `idRol`) VALUES
-(1, 'socio1', 1),
-(2, 'socio2', 1),
-(3, 'socio3', 1),
-(4, 'mozo1', 2),
-(5, 'mozo2', 2),
-(6, 'mozo3', 2),
-(7, 'cocinero1', 3),
-(8, 'cocinero2', 3),
-(9, 'bartender1', 4),
-(10, 'cervecero1', 5);
+INSERT INTO `empleados` (`id`, `nombre`, `rol`) VALUES
+(1, 'socio', 'socio'),
+(2, 'mozo', 'mozo'),
+(3, 'cocinero', 'cocinero');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `roles`
+-- Estructura de tabla para la tabla `pedidos`
 --
 
-CREATE TABLE `roles` (
+CREATE TABLE `pedidos` (
   `id` int(11) NOT NULL,
-  `rol` varchar(30) COLLATE utf8_spanish_ci NOT NULL
+  `nombreCliente` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `articulo` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
+  `articuloTipo` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `estado` int(11) NOT NULL,
+  `tiempoEstimado` datetime NOT NULL,
+  `fotoMesa` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `roles`
---
-
-INSERT INTO `roles` (`id`, `rol`) VALUES
-(1, 'Socio'),
-(2, 'Mozo'),
-(3, 'Cocinero'),
-(4, 'Bartender'),
-(5, 'Cervecero');
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `articulos`
+--
+ALTER TABLE `articulos`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `empleados`
@@ -83,9 +97,9 @@ ALTER TABLE `empleados`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `roles`
+-- Indices de la tabla `pedidos`
 --
-ALTER TABLE `roles`
+ALTER TABLE `pedidos`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -93,16 +107,22 @@ ALTER TABLE `roles`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `articulos`
+--
+ALTER TABLE `articulos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de la tabla `empleados`
 --
 ALTER TABLE `empleados`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT de la tabla `roles`
+-- AUTO_INCREMENT de la tabla `pedidos`
 --
-ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+ALTER TABLE `pedidos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
